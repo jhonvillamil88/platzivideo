@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+        body {
+            margin:0;
+        }
+        .friends-playlist-item p,li, img {
+            cursor: pointer;
+        }
+        .friends-playlist-item p:hover,li:hover {
+            color: #E82347 !important;
+        }
+        .container {
+            display: grid;
+            grid-template:  repeat(7, 1fr) / repeat(4, 1fr);
+            width: 100%;
+            height: 150vh;
+        }
+        .menu{
+            grid-row: 1 / span 7;
+            grid-column: 1 / span 1;
+            background-color: #1C2033;
+            align-items: center;
+            justify-items: center;
+            display: grid;
+        }
+        .menu-body {
+            width: 90%;
+            height: 90%;
+        }
+        .menu-body .title-platzi {
+            color: white;
+        }
+        .menu-body .title-video {
+            color: #E82347;
+        }
+        .menu-body .my-playlist {
+            color: white;
+        }
+        .my-playlist-item-ol li{
+            margin-bottom: 5%;
+        }
+        .my-playlist-number {
+            display: inline-block;
+            margin-top: 0;
+            margin-right: 20px;
+            justify-content: center;
+            width: 5%;
+        }
+        .my-playlist-title {
+            display: inline-block;
+            justify-content: center;
+            width: 70%;
+        }
+        .menu-body .friends-playlist {
+            color: white;
+        }
+        .menu-body .friends-playlist-item {
+            display: grid;
+            grid-template: 1fr / repeat(4, 1fr);
+            margin-bottom: 5%;
+        }
+        .friends-playlist-item-profile{
+            width: 64px;
+            border-radius: 50%;
+            display: inline-block;
+            grid-column: 1 / span 1;
+        }
+        .friends-playlist-item-name{
+            display: inline-block;
+            align-items: center;
+            grid-column: 2 / span 3;
+        }
+        .video {
+            grid-row: 1 / span 3;
+            grid-column: 2 / span 3;
+            position: relative;
+        }
+        .video-content{
+            position: absolute;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .video-content-img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-content-i-play {
+            position: absolute;
+            top:50%;
+            left:50%;
+            margin: auto;
+            font-size: 64px;
+            color:white;
+        }
+        .video-content-i-play:hover {
+            color:red;
+        }
+        .video-content-i-arrow:hover {
+            color:red;
+        }
+        .video-content-i-arrow {
+            position: absolute;
+            top:10px;
+            left: 10px;
+            font-size: 64px;
+            color:white;
+        }
+        .detail {
+            grid-row: 4 / span 1;
+            grid-column: 2 / span 3;
+            align-content: center;
+            display: grid;
+            position: relative;
+            justify-items: center;
+        }
+        .detail-content {
+            position: absolute;
+            width: 95%;
+            height: 95%;
+        }
+        .detail-title{
+            display: block;
+        }
+        .detail-buttons{
+            display: block;
+        }
+        .detail-buttons button,i {
+            margin-right: 2%;
+            font-size: 14px;
+            color:rgb(189, 190, 190);
+        }
+        .detail-rigth {
+            margin-right: 10% ! important;
+        }
+        .commentary {
+            grid-row: 5 / -1;
+            grid-column: 2 / -1;
+        }
+        .icons{
+            display: inline-block;
+            margin-right: 2%;
+            text-align: center;
+            cursor: pointer;
+        }
+        .icons i:hover,p:hover{
+            color:black !important;
+        }
+        .icons p{
+            margin-top:0;
+            font-size: 14px;
+            color:rgb(189, 190, 190);
+        }
+        .detail-add-list{
+            color: white !important;
+            background-color: #EA6C82;
+            border-radius: 15%;
+            height: 25px; 
+        }
+        .detail-invierno{
+            color: white !important;
+            background-color: #984BFB;
+            border-radius: 15%;
+        }
+        .detail-verano{
+            color: white !important;
+            background-color: #46E8C1;
+            border-radius: 15%;
+        }
+        .detail-otoño{
+            color: white !important;
+            background-color: #D91828;
+            border-radius: 15%;
+        }
+        .detail-primavera{
+            color: white !important;
+            background-color: #E62B84;
+            border-radius: 15%;
+        }
+        .detail-name {
+            margin-bottom: 0;
+        }
+        .detail-views {
+            margin-top:0;
+            font-size: 0.9em;
+            color:rgb(189, 190, 190);
+        }
+        button {
+            border:0;
+            height: 25px;
+        }
+        button:hover {
+            background-color: dimgray;
+        }
+        .commentary {
+            display: grid;
+            justify-items: center;
+        }
+        .commentary-content {
+            height: 95%;
+            width: 95%;
+            display: grid;
+            grid-template: 1fr  / repeat(2, 1fr);
+            justify-items: center;
+        }
+        .add-comentary {
+            position: relative;
+            width: 100%;
+        }
+        .comentary-input-add{
+            border:0;
+            background-color: gray;
+            border-radius: 5%;
+            width: 70%;
+            height: 30px;
+            padding-left: 40px;
+            color: white;
+        }
+        .comentary-input-add::placeholder{
+            color: white;
+        }
+        .commentary-add-profile{
+            width: 32px;
+            position: absolute;
+            border-radius: 50%;
+            left: 0;
+        }
+        .commentarys {
+            width: 100%;
+        }
+        .comentary-item{
+            display: grid;
+            grid-template: repeat(2, 1fr) / 70px 1fr;
+            margin-top: 15px;
+        }
+        .comentary-item-profile {
+            grid-row: 1 / span 2;
+            grid-column: 1 / span 1;
+            width: 64px;
+            border-radius: 50%;
+        }
+        .comentary-item-name {
+            grid-row: 1 / span 2;
+            grid-column: 2 / -1;
+            margin-bottom: 0;
+        }
+        .comentary-item-commentary {
+            grid-row: 2 / span 1;
+            grid-column: 2 / -1;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        .suggestions-item-img {
+            width: 400px;
+        }
+        .friends-playlist-item {
+            position: relative;
+        }
+        .suggestions-item p {
+            width: 400px;
+            margin-top:0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <div class="menu-body">
+                <h1>
+                    <span class="title-platzi">Platzi</span>
+                    <span class="title-video">Video</span>
+                </h1>
+                <div class="my-playlist" >
+                    <h4>Mi playList</h4>
+                    <div class="my-playlist-item">
+                        <ol class="my-playlist-item-ol" type="1">
+                            <li>5 reasons to choose a notebook over a computer desktop</li>
+                            <li>Por que es cali es el mejor equipo de colombia</li>
+                            <li>Como ser un maestro pokemon</li>
+                            <li>Como dormir 8 horas en 4 horas</li>
+                            <li>Por que si jesucrito murio de tres clavos solamente ...</li>
+                            <li>Por que se caso adonay</li>
+                            <li>Perro bailando salsa</li>
+                            <li>Manual solucionados de conflictos</li>
+                            <li>Ya solo faltan 2</li>
+                            <li>Listo termine ........</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="friends-playlist">
+                    <h4>Playlist de mis amigos</h4>
+                    <div class="friends-playlist-item">
+                        <img class="friends-playlist-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="friends-playlist-item-name">Marisol arango</p>
+                    </div>
+                    <div class="friends-playlist-item">
+                        <img class="friends-playlist-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="friends-playlist-item-name">Marisol arango</p>
+                    </div>
+                    <div class="friends-playlist-item">
+                        <img class="friends-playlist-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="friends-playlist-item-name">Lupita villamil</p>
+                    </div>
+                    <div class="friends-playlist-item">
+                        <img class="friends-playlist-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="friends-playlist-item-name">John villamil</p>
+                    </div>
+                    <div class="friends-playlist-item">
+                        <img class="friends-playlist-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="friends-playlist-item-name">Miley villamil</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="video">
+            <div class="video-content">
+                <img class="video-content-img" src="./src/video.jpg" alt="">
+                <i class="fab fa-youtube video-content-i-play"></i>
+                <i class="fas fa-arrow-left video-content-i-arrow"></i>
+            </div>
+        </div>
+        <div class="detail">
+            <div class="detail-content">
+                <div class="detail-title">
+                    <p class="detail-name">Especial de hallowen - Pokemon</p>
+                    <p class="detail-views">13,002,200 views</p>
+                </div>
+                <div  class="detail-buttons">
+                    <button class="detail-add-list">Agregar a mi lista</button>
+                    <div class="icons">
+                        <i class="fas fa-share detail-share"></i>
+                        <p>Compartir</p>
+                    </div>
+                    <div class="icons detail-rigth">
+                        <i class="fas fa-cloud-download-alt"></i>
+                        <p>Descargar</p>
+                    </div>
+                    <button class="detail-invierno">Invierno</button>
+                    <button class="detail-verano">Verano</button>
+                    <button class="detail-otoño" >Otoño</button>
+                    <button class="detail-primavera">primavera</button>
+                </div>
+            </div>
+        </div>
+        <div class="commentary">
+            <div class="commentary-content">
+                <div class="commentarys">
+                    <h3>Comentarios</h3>
+                    <div class="add-comentary">
+                        <input class="comentary-input-add" type="text" placeholder="Añade un comentario">
+                        <img class="commentary-add-profile" src="./src/profile.jpeg" alt="">
+                    </div>
+                    <div class="comentary-item">
+                        <img class="comentary-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="comentary-item-name">Marisol arango</p>
+                        <p class="comentary-item-commentary">Me encanta pokemon ...</p>
+                    </div>
+                    <div class="comentary-item">
+                        <img class="comentary-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="comentary-item-name">Marisol arango</p>
+                        <p class="comentary-item-commentary">Me encanta pokemon ...</p>
+                    </div>
+                    <div class="comentary-item">
+                        <img class="comentary-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="comentary-item-name">Lupita</p>
+                        <p class="comentary-item-commentary">Quiero ser un pokemon ...</p>
+                    </div>
+                    <div class="comentary-item">
+                        <img class="comentary-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="comentary-item-name">Miley</p>
+                        <p class="comentary-item-commentary">No pues miau</p>
+                    </div>
+                    <div class="comentary-item">
+                        <img class="comentary-item-profile" src="./src/profile.jpeg" alt="">
+                        <p class="comentary-item-name">John villamil</p>
+                        <p class="comentary-item-commentary">Soy un maestro pokemon ...</p>
+                    </div>                                                                                                        
+                </div>
+                <div class="suggestions">
+                    <h3>Sugerencias</h3>
+                    <div class="suggestions-item">
+                        <img class="suggestions-item-img" src="./src/suggestion1.jpg" alt="">
+                        <p>La mejor serie de mi infancia</p>
+                    </div>
+                    <div class="suggestions-item">
+                        <img class="suggestions-item-img" src="./src/suggestion2.jpeg" alt="">
+                        <p>Me encantaba esta serie cuando era niño, corria al salir de la escuela para poder verla</p>
+                    </div>
+                    <div class="suggestions-item">
+                        <img class="suggestions-item-img" src="./src/suggestion3.jpeg" alt="">
+                        <p>La mejor serie de mi infancia</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
